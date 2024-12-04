@@ -1,13 +1,14 @@
 [tool.poetry]
 name = "my-monmon"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "Monster Monday project"
+authors = ["trung.dao.ubuntu <daohuynhtrung43@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-mysql-connector-python = "^9.1.0"
+python = "^3.12"
+django = "^5.1.4"
+psycopg2-binary = "^2.9.10"
 
 
 [build-system]
