@@ -19,4 +19,4 @@ RUN poetry install
 
 # Expose port 8000
 EXPOSE 8000
-
+CMD ["poetry", "run" ,"python", "manage.py", "runserver", "0.0.0.0:8000"] 

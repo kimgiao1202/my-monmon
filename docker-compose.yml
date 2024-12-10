@@ -1,10 +1,9 @@
-version: "3.9"
+version: "3"
 
 services:
   web:
     build:
       context: .
-    command: poetry --vertion
     volumes:
       - .:/app
     ports:
