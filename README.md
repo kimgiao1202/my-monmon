@@ -6,7 +6,7 @@ little project to maintain my little money and make sure it pretty to read in an
 
 - [ ] Setup Docker
 - [ ] Setup Linter
-- [ ] Setup formatter
+- [X] Setup formatter
 
 # Run
 
