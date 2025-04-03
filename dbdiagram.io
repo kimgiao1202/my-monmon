@@ -1,36 +1,55 @@
-Table follows {
-  following_account_id integer
-  followed_account_id integer
-  created_at timestamp 
-}
-
-Table accounts {
-  id integer [primary key]
-  accountname varchar
-  role varchar
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+Table users {
+  user_id varchar [pk]
+  name varchar
+  username varchar
+  password varchar
+  updated_at timestamp
   created_at timestamp
+  is_deleted boolean
 }
-
+Table parent_categories {
+  parent_category_id varchar [pk]
+  name varchar
+  category_type varchar [note: 'Earned/Paid']
+  updated_at timestamp
+  created_at timestamp
+  is_deleted boolean
+}
+Table categories {
+  category_id varchar [pk]
+  user_id varchar
+  name varchar
+  updated_at timestamp
+  created_at timestamp
+  is_deleted boolean
+}
 Table transactions {
-  id integer [primary key]
-  type varchar
-  comments text [note: 'Content of the post']
-  account_id integer [not null]
+  transaction_id varchar [pk]
+  transaction_type varchar
+  transaction_date timestamp
   amount float
+  comment varchar
+  is_reported boolean
+  category_id varchar
+  user_id varchar
+  wallet_id varchar
+  updated_at timestamp
   created_at timestamp
+  is_deleted boolean
 }
-
 Table wallets {
-  id integer [primary key]
-  type varchar [note: 'Bank, Cash, Digital wallet,..']
-  account_id integer [not null]
-  amount float
+  wallet_id varchar [pk]
+  user_id varchar
+  name varchar
+  updated_at timestamp
   created_at timestamp
+  is_deleted boolean
 }
-
-Ref account_transactions: transactions.account_id > accounts.id // many-to-one
-Ref account_wallets: wallets.account_id > accounts.id // many-to-one
-
-Ref: accounts.id < follows.following_account_id
-
-Ref: accounts.id < follows.followed_account_id
+Ref parent_categories_categories: parent_categories.parent_category_id < categories.category_id
+Ref users_categories: categories.user_id > users.user_id 
+Ref transactions_categories: transactions.category_id > categories.category_id
+Ref transactions_categories: transactions.user_id > categories.user_id
+Ref users_wallets: users.user_id < wallets.user_id
+Ref transactions_wallets: transactions.wallet_id > wallets.wallet_id
